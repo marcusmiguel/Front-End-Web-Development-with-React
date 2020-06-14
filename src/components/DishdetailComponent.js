@@ -11,7 +11,7 @@ import {
 function RenderDish(dish) {
   if ((dish != null) & (dish != undefined)) {
     return (
-      <div className="col-sm-12 col-md-5 m-1">
+      <div className="col-12 col-md-5 m-1">
         <Card>
           <CardImg top src={dish.image} alt={dish.name} />
           <CardBody>
@@ -28,7 +28,7 @@ function RenderDish(dish) {
 function RenderComments(comments) {
   if (comments != null) {
     return (
-      <div className="col-sm-12 col-md-5 m-1">
+      <div className="col-12 col-md-5 m-1">
         <h4>Comments</h4>
         <ul class="list-unstyled">
           {comments.map((comment) => (
@@ -63,9 +63,11 @@ const DishDetail = (props) => {
     props.dish != undefined
   ) {
     return (
-      <div className="row">
-        {RenderDish(props.dish)}
-        {RenderComments(props.dish.comments)}
+      <div className="container">
+        <div className="row">
+          {RenderDish(props.dish)}
+          {RenderComments(props.dish.comments)}
+        </div>
       </div>
     );
   } else {

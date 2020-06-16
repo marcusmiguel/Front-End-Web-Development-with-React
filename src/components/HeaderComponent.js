@@ -1,9 +1,7 @@
-import React, { Component } from "react";
 import {
   Navbar,
   NavbarBrand,
   Nav,
-  NavLink,
   NavbarToggler,
   Collapse,
   NavItem,
@@ -17,6 +15,8 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -48,6 +48,7 @@ class Header extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   }
+
   toggleNav() {
     this.setState({
       isNavOpen: !this.state.isNavOpen,

@@ -19,6 +19,7 @@ import {
   Label,
 } from "reactstrap";
 import { baseUrl } from "../shared/baseUrl";
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -129,13 +130,20 @@ class CommentForm extends Component {
 
 function RenderDish({ dish }) {
   return (
-    <Card>
-      <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-      <CardBody>
-        <CardTitle>{dish.name}</CardTitle>
-        <CardText>{dish.description}</CardText>
-      </CardBody>
-    </Card>
+    <FadeTransform
+      in
+      transformProps={{
+        exitTransform: "scale(0.5) translateY(-50%)",
+      }}
+    >
+      <Card>
+        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+        <CardBody>
+          <CardTitle>{dish.name}</CardTitle>
+          <CardText>{dish.description}</CardText>
+        </CardBody>
+      </Card>
+    </FadeTransform>
   );
 }
 
@@ -145,25 +153,29 @@ function RenderComments({ comments, postComment, dishId }) {
       <div>
         <h4>Comments</h4>
         <ul class="list-unstyled">
-          {comments.map((comment) => (
-            <li key={comment.id}>
-              <div className="row">
-                <div className="col-12">{comment.comment} </div>
-              </div>
-              <div className="row">
-                <div className="col-12 m-1">
-                  -- {comment.author},{" "}
-                  {new Intl.DateTimeFormat("en-US", {
-                    year: "numeric",
+          <Stagger in>
+            {comments.map((comment) => (
+              <Fade in>
+                <li key={comment.id}>
+                  <div className="row">
+                    <div className="col-12">{comment.comment} </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12 m-1">
+                      -- {comment.author},{" "}
+                      {new Intl.DateTimeFormat("en-US", {
+                        year: "numeric",
 
-                    month: "long",
+                        month: "long",
 
-                    day: "2-digit",
-                  }).format(new Date(comment.date))}
-                </div>
-              </div>
-            </li>
-          ))}
+                        day: "2-digit",
+                      }).format(new Date(comment.date))}
+                    </div>
+                  </div>
+                </li>
+              </Fade>
+            ))}
+          </Stagger>
         </ul>
         <CommentForm dishId={dishId} postComment={postComment} />
       </div>

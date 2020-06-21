@@ -6,7 +6,6 @@ import { Loading } from "./LoadingComponent";
 import {
   Card,
   CardImg,
-  CardImgOverlay,
   CardText,
   CardBody,
   CardTitle,
